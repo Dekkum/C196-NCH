@@ -82,14 +82,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void handleAlerts() {
-        Log.v("TAYBUG", "We are handling alerts");
+        Log.v("DEBUG", "We are handling alerts");
         ArrayList<String> alerts = new ArrayList<>();
 
-        Log.v("TAYBUG", "Courses: " + courseData.size() + "\nAssessments: " + assessmentData.size());
+        Log.v("DEBUG", "Courses: " + courseData.size() + "\nAssessments: " + assessmentData.size());
 
         // Loop through Courses to find start and end dates.
         for(Course course: courseData) {
-            Log.v("TAYBUG", "We are looping through courses to find due dates");
+            Log.v("DEBUG", "We are looping through courses to find due dates");
             if(DateUtils.isToday(course.getStartDate().getTime())) {
                 Log.v("DEBUG", "Start date is today.");
                 alerts.add("Course " + course.getTitle() + " begins today!");
@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         // Loop through assessments to find start dates
         for(Assessment assessment: assessmentData) {
-            Log.v("TAYBUG", "We are looping through assessments to find due dates");
+            Log.v("DEBUG", "We are looping through assessments to find due dates");
             if(DateUtils.isToday(assessment.getDate().getTime())) {
                 Log.v("DEBUG", "Assessment due date is today");
                 alerts.add("Assessment " + assessment.getTitle() + " is due today!");
