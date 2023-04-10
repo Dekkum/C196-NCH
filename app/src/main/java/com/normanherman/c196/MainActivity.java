@@ -34,9 +34,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -248,8 +246,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 toast.show();
                 break;
             case R.id.nav_mentors:
-                toast = Toast.makeText(this, "Mentors pressed", duration);
-                toast.show();
+                // toast = Toast.makeText(this, "Mentors pressed", duration);
+                // toast.show();
+                showMentors();
                 break;
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

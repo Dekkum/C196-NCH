@@ -16,7 +16,7 @@ import com.normanherman.c196.models.Term;
  * Norman Herman
  * WGU C196
  * This class sets up the database.  It is referenced by the AppRepository class.
- * That is the only class that has direct access to this database class.
+ * That is the only class that has direct access to the database class.
  */
 
 @Database(entities = {Term.class, Course.class, Assessment.class, Mentor.class}, version = 8)
