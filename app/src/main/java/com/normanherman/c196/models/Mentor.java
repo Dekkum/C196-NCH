@@ -1,11 +1,8 @@
 package com.normanherman.c196.models;
 
 import androidx.room.Entity;
-import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
-
-import static androidx.room.ForeignKey.CASCADE;
 
 @Entity(tableName = "mentors")
 public class Mentor {
