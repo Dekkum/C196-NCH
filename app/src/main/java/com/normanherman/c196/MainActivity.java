@@ -246,8 +246,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 toast.show();
                 break;
             case R.id.nav_mentors:
-                // toast = Toast.makeText(this, "Mentors pressed", duration);
-                // toast.show();
+                toast = Toast.makeText(this, "Mentors pressed", duration);
+                toast.show();
                 showMentors();
                 break;
         }
