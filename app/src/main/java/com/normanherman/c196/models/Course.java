@@ -1,13 +1,10 @@
 package com.normanherman.c196.models;
 
 import androidx.room.Entity;
-import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.util.Date;
-
-import static androidx.room.ForeignKey.CASCADE;
 
 @Entity(tableName = "courses")
 public class Course {
@@ -18,6 +15,7 @@ public class Course {
     private Date anticipatedEndDate;
     private CourseStatus courseStatus;
     private String note;
+    private boolean enableNotifications;
 
     private int termId;
 
@@ -35,6 +33,7 @@ public class Course {
         this.courseStatus = courseStatus;
         this.termId = termId;
         this.note = note;
+        this.enableNotifications = false;
     }
 
     @Ignore
@@ -44,6 +43,7 @@ public class Course {
         this.anticipatedEndDate = anticipatedEndDate;
         this.courseStatus = courseStatus;
         this.termId = termId;
+        this.enableNotifications = false;
     }
 
     public Course(String title, Date startDate, Date anticipatedEndDate, CourseStatus courseStatus) {
@@ -51,6 +51,7 @@ public class Course {
         this.startDate = startDate;
         this.anticipatedEndDate = anticipatedEndDate;
         this.courseStatus = courseStatus;
+        this.enableNotifications = false;
     }
 
     public int getId() {
@@ -107,5 +108,13 @@ public class Course {
 
     public void setTermId(int termId) {
         this.termId = termId;
+    }
+
+    public boolean getEnableNotifications() {
+        return enableNotifications;
+    }
+
+    public void setEnableNotifications(boolean notificationPreference) {
+        this.enableNotifications = notificationPreference;
     }
 }

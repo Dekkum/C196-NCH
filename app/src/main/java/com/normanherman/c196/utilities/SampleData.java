@@ -52,8 +52,8 @@ public class SampleData {
     public static List<Mentor> getMentors() {
         List<Mentor> mentors = new ArrayList<>();
         mentors.add(new Mentor("Norman Herman", "dekkum@gmail.com", "970-123-2121", 10000));
-        mentors.add(new Mentor("Homer Simpson", "doh@gmail.com", "555-223-1526", 10001));
-        mentors.add(new Mentor("Jimbo Jones", "cooldude420@gmail.com", "555-223-4124", 10002));
+        mentors.add(new Mentor("Vincent Phillips", "veelewy@gmail.com", "555-223-1526", 10001));
+        mentors.add(new Mentor("Tyler Durden", "projectmayhem@gmail.com", "555-223-4124", 10002));
         return mentors;
     }
 
