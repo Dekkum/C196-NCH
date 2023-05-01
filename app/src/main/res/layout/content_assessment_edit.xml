@@ -52,14 +52,22 @@
 
         <TextView
             android:id="@+id/ass_edit_type_label"
-            android:layout_width="@dimen/detail_label_width"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/ass_edit_status_label"
             android:layout_margin="@dimen/text_margin"
             app:layout_constraintTop_toBottomOf="@+id/ass_edit_date"
             app:layout_constraintStart_toStartOf="parent"
             android:textSize="20sp"/>
-
+        <CheckBox
+            android:id="@+id/ass_edit_notifications_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enable notifications for this assessment"
+            android:layout_margin="@dimen/text_margin"
+            app:layout_constraintTop_toBottomOf="@+id/ass_edit_type_dropdown"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textSize="20sp"/>
         <Spinner
             android:id="@+id/ass_edit_type_dropdown"
             android:layout_width="0dp"

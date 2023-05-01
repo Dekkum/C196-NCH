@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -40,6 +41,9 @@ public class AssessmentEditActivity extends AppCompatActivity {
 
     @BindView(R.id.ass_edit_type_dropdown)
     Spinner spAssessmentType;
+
+    @BindView(R.id.ass_edit_notifications_checkbox)
+    CheckBox chkbxNotifications;
 
     private EditorViewModel mViewModel;
     private boolean mNewAssessment, mEditing;
@@ -84,6 +88,7 @@ public class AssessmentEditActivity extends AppCompatActivity {
                 tvAssessmentDate.setText(TextFormatting.fullDateFormat.format(assessment.getDate()));
                 int position = getSpinnerPosition(assessment.getAssessmentType());
                 spAssessmentType.setSelection(position);
+                chkbxNotifications.setChecked(assessment.getEnabledNotifications());
             }
         });
 
@@ -135,7 +140,7 @@ public class AssessmentEditActivity extends AppCompatActivity {
     public void saveAndReturn() {
         try {
             Date date = TextFormatting.fullDateFormat.parse(tvAssessmentDate.getText().toString());
-            mViewModel.saveAssessment(tvAssessmentTitle.getText().toString(), date, getSpinnerValue(), courseId);
+            mViewModel.saveAssessment(tvAssessmentTitle.getText().toString(), date, getSpinnerValue(), courseId, chkbxNotifications.isChecked());
             Log.v("Saved Assessment", tvAssessmentTitle.toString());
         } catch (ParseException e) {
             Log.v("Exception", e.getLocalizedMessage());

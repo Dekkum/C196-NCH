@@ -62,6 +62,9 @@ public class CourseDetailsActivity extends AppCompatActivity implements Assessme
     @BindView(R.id.fab_add_assessment)
     FloatingActionButton fabAddAssessment;
 
+    @BindView(R.id.course_detail_notifications)
+    TextView tvNotifications;
+
     @BindView(R.id.fab_add_mentor)
     FloatingActionButton fabAddMentor;
 
@@ -106,6 +109,13 @@ public class CourseDetailsActivity extends AppCompatActivity implements Assessme
             tvCourseStatus.setText(course.getCourseStatus().toString());
             tvCourseNote.setText(course.getNote());
             toolbar.setTitle(course.getTitle());
+            if (course.getEnableNotifications()) {
+                tvNotifications.setText("Enabled");
+            }
+            else {
+                tvNotifications.setText("Disabled");
+            }
+
         });
 
         // Assessments

@@ -20,6 +20,7 @@ public class Assessment {
     private Date date;
     private AssessmentType assessmentType;
     private int courseId;
+    private boolean enabledNotifications;
 
     @Ignore
     public Assessment() {
@@ -32,12 +33,14 @@ public class Assessment {
         this.date = date;
         this.assessmentType = assessmentType;
         this.courseId = courseId;
+        this.enabledNotifications = false;
     }
 
     public Assessment(String title, Date date, AssessmentType assessmentType) {
         this.title = title;
         this.date = date;
         this.assessmentType = assessmentType;
+        this.enabledNotifications = false;
     }
 
     public int getId() {
@@ -78,5 +81,13 @@ public class Assessment {
 
     public void setCourseId(int courseId) {
         this.courseId = courseId;
+    }
+
+    public boolean getEnabledNotifications() {
+        return enabledNotifications;
+    }
+
+    public void setEnabledNotifications(boolean enableNotifications) {
+        this.enabledNotifications = enableNotifications;
     }
 }

@@ -72,4 +72,5 @@
     <string name="course_edit_note_hint">Edit Note</string>
     <string name="course_detail_mentors_label">Mentors</string>
     <string name="course_detail_share_label">Share Notes</string>
+    <string name="ass_detail_notification_label">Notifications</string>
 </resources>

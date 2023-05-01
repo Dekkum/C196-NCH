@@ -72,6 +72,17 @@
         app:layout_constraintTop_toBottomOf="@+id/course_detail_end" />
 
     <TextView
+        android:id="@+id/course_detail_notifications"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_margin"
+        android:text="(Dis/En)abled"
+        android:textSize="@dimen/detail_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/course_detail_notifications_label"
+        app:layout_constraintTop_toBottomOf="@+id/course_detail_note" />
+
+    <TextView
         android:id="@+id/course_detail_note_label"
         android:layout_width="@dimen/detail_label_width"
         android:layout_height="wrap_content"
@@ -99,12 +110,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/text_margin"
-        app:fabSize="mini"
+        android:backgroundTint="@color/colorAccent"
         android:src="@android:drawable/ic_menu_share"
         app:borderWidth="0dp"
-        android:backgroundTint="@color/colorAccent"
+        app:fabSize="mini"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/course_detail_note_label"/>
+        app:layout_constraintTop_toBottomOf="@+id/course_detail_notifications_label" />
 
     <TextView
         android:id="@+id/course_detail_share_label"
@@ -118,14 +129,24 @@
         app:layout_constraintBottom_toBottomOf="@id/course_detail_share_fab"
         app:layout_constraintTop_toTopOf="@+id/course_detail_share_fab" />
 
+    <TextView
+        android:id="@+id/course_detail_notifications_label"
+        android:layout_width="@dimen/detail_label_width"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_margin"
+        android:text="Notifications"
+        android:textSize="@dimen/detail_text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/course_detail_note" />
+
     <View
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="8dp"
         android:background="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/course_detail_share_fab" />
 

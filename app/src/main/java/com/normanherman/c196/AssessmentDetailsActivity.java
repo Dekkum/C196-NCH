@@ -25,6 +25,9 @@ public class AssessmentDetailsActivity extends AppCompatActivity {
     @BindView(R.id.ass_detail_type)
     TextView tvAssessmentType;
 
+    @BindView(R.id.ass_detail_notifications)
+    TextView tvNotifications;
+
     private Toolbar toolbar;
     private int assessmentId;
     private EditorViewModel mViewModel;
@@ -47,6 +50,12 @@ public class AssessmentDetailsActivity extends AppCompatActivity {
             tvAssessmentDate.setText(TextFormatting.fullDateFormat.format(assessment.getDate()));
             tvAssessmentType.setText(assessment.getAssessmentType().toString());
             toolbar.setTitle(assessment.getTitle());
+            if (assessment.getEnabledNotifications()) {
+                tvNotifications.setText("Enabled");
+            }
+            else {
+                tvNotifications.setText("Disabled");
+            }
         });
 
         Bundle extras = getIntent().getExtras();

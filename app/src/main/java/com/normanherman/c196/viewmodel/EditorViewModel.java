@@ -86,7 +86,7 @@ public class EditorViewModel extends AndroidViewModel {
         mRepository.insertTerm(term);
     }
 
-    public void saveCourse(String courseTitle, Date startDate, Date endDate, CourseStatus courseStatus, int termId, String note) {
+    public void saveCourse(String courseTitle, Date startDate, Date endDate, CourseStatus courseStatus, int termId, String note, boolean enableNotifications) {
         Course course = mLiveCourse.getValue();
 
         if(course == null) {
@@ -101,6 +101,7 @@ public class EditorViewModel extends AndroidViewModel {
             course.setCourseStatus(courseStatus);
             course.setTermId(termId);
             course.setNote(note);
+            course.setEnableNotifications(enableNotifications);
         }
         mRepository.insertCourse(course);
     }
@@ -120,7 +121,7 @@ public class EditorViewModel extends AndroidViewModel {
         mRepository.insertMentor(mentor);
     }
 
-    public void saveAssessment(String assessmentTitle, Date date, AssessmentType assessmentType, int courseId) {
+    public void saveAssessment(String assessmentTitle, Date date, AssessmentType assessmentType, int courseId, boolean checked) {
         Assessment assessment = mLiveAssessment.getValue();
 
         if(assessment == null) {
@@ -133,6 +134,7 @@ public class EditorViewModel extends AndroidViewModel {
             assessment.setDate(date);
             assessment.setAssessmentType(assessmentType);
             assessment.setCourseId(courseId);
+            assessment.setEnabledNotifications(checked);
         }
         mRepository.insertAssessment(assessment);
     }

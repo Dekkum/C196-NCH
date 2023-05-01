@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
@@ -58,6 +59,9 @@ public class CourseEditActivity extends AppCompatActivity {
     @BindView(R.id.course_edit_note)
     EditText tvNote;
 
+    @BindView(R.id.course_edit_notification_checkbox)
+    CheckBox chkbxNotifications;
+
     private EditorViewModel mViewModel;
     private boolean mNewCourse, mEditing;
     private int termId = -1;
@@ -103,6 +107,7 @@ public class CourseEditActivity extends AppCompatActivity {
                 tvNote.setText(course.getNote());
                 int position = getSpinnerPosition(course.getCourseStatus());
                 spCourseStatus.setSelection(position);
+                chkbxNotifications.setChecked(course.getEnableNotifications());
             }
         });
 
@@ -155,7 +160,7 @@ public class CourseEditActivity extends AppCompatActivity {
         try {
             Date startDate = TextFormatting.fullDateFormat.parse(tvCourseStartDate.getText().toString());
             Date endDate = TextFormatting.fullDateFormat.parse(tvCourseEndDate.getText().toString());
-            mViewModel.saveCourse(tvCourseTitle.getText().toString(), startDate, endDate, getSpinnerValue(), termId, tvNote.getText().toString());
+            mViewModel.saveCourse(tvCourseTitle.getText().toString(), startDate, endDate, getSpinnerValue(), termId, tvNote.getText().toString(), chkbxNotifications.isChecked());
             Log.v("Saved Course", tvCourseTitle.toString());
         } catch (ParseException e) {
             Log.v("Exception", e.getLocalizedMessage());
