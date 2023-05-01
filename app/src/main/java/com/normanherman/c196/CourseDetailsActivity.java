@@ -109,7 +109,7 @@ public class CourseDetailsActivity extends AppCompatActivity implements Assessme
             tvCourseStatus.setText(course.getCourseStatus().toString());
             tvCourseNote.setText(course.getNote());
             toolbar.setTitle(course.getTitle());
-            if (course.getEnableNotifications()) {
+            if (course.getEnabledNotifications()) {
                 tvNotifications.setText("Enabled");
             }
             else {

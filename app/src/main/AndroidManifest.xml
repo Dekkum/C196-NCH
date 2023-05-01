@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.normanherman.c196">
-
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -38,7 +38,7 @@
         <activity android:name=".MentorDetailsActivity" />
         <activity android:name=".MentorEditActivity" />
         <receiver android:name=".utilities.Alerting" />
-
+        <service android:name=".SchedulerNotifyService"/>
     </application>
 
 </manifest>

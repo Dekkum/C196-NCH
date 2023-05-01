@@ -107,7 +107,7 @@ public class CourseEditActivity extends AppCompatActivity {
                 tvNote.setText(course.getNote());
                 int position = getSpinnerPosition(course.getCourseStatus());
                 spCourseStatus.setSelection(position);
-                chkbxNotifications.setChecked(course.getEnableNotifications());
+                chkbxNotifications.setChecked(course.getEnabledNotifications());
             }
         });
 

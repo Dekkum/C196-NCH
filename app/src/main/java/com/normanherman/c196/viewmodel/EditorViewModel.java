@@ -101,7 +101,7 @@ public class EditorViewModel extends AndroidViewModel {
             course.setCourseStatus(courseStatus);
             course.setTermId(termId);
             course.setNote(note);
-            course.setEnableNotifications(enableNotifications);
+            course.setEnabledNotifications(enableNotifications);
         }
         mRepository.insertCourse(course);
     }

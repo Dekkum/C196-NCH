@@ -1,10 +1,14 @@
 package com.normanherman.c196;
 
 import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.google.android.material.navigation.NavigationView;
@@ -21,6 +25,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.Observer;
@@ -51,6 +57,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private MainViewModel mViewModel;
     private TextView termStatus, courseStatus, assessmentStatus, mentorStatus;
 
+    public static final String CHANNEL_ID = "NCH_Scheduler";
+    public static final String CHANNEL_NAME = "NCH Scheduler";
+    public static final String CHANNEL_DESC = "Notifications from the NCH Scheduler app";
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -77,6 +89,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         courseStatus = findViewById(R.id.status_courses_count);
         assessmentStatus = findViewById(R.id.status_assessments_count);
         mentorStatus = findViewById(R.id.status_mentors_count);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel notifyChannel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT);
+            notifyChannel.setDescription(CHANNEL_DESC);
+            NotificationManager notifyManager = getSystemService(NotificationManager.class);
+            notifyManager.createNotificationChannel(notifyChannel);
+        }
+
     }
 
     private void handleAlerts() {
@@ -85,24 +105,58 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         Log.v("DEBUG", "Courses: " + courseData.size() + "\nAssessments: " + assessmentData.size());
 
+        NotificationManager notifyManager = getSystemService(NotificationManager.class);
+
         // Loop through Courses to find start and end dates.
         for(Course course: courseData) {
             Log.v("DEBUG", "We are looping through courses to find due dates");
-            if(DateUtils.isToday(course.getStartDate().getTime())) {
+            if(course.getEnabledNotifications() && DateUtils.isToday(course.getStartDate().getTime())) {
                 Log.v("DEBUG", "Start date is today.");
-                alerts.add("Course " + course.getTitle() + " begins today!");
-            } else if(DateUtils.isToday(course.getAnticipatedEndDate().getTime())) {
+
+                Intent notificationIntent = new Intent(this, MainActivity.class);
+                PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
+
+                Notification newNotification = new NotificationCompat.Builder(this, CHANNEL_ID)
+                        .setContentTitle("Course Starting")
+                        .setContentText(course.getTitle() + " is starting today!")
+                        .setSmallIcon(R.drawable.rounded_corners)
+                        .setContentIntent(pendingIntent)
+                        .addAction(R.drawable.rounded_corners, "Course Starting",pendingIntent)
+                        .build();
+                notifyManager.notify(course.getId(),newNotification);
+            } else if(course.getEnabledNotifications() && DateUtils.isToday(course.getAnticipatedEndDate().getTime())) {
                 Log.v("DEBUG", "End date is today!");
-                alerts.add("Course" + course.getTitle() + " ends today!");
+                Intent notificationIntent = new Intent(this, MainActivity.class);
+                PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
+
+                Notification newNotification = new NotificationCompat.Builder(this, CHANNEL_ID)
+                        .setContentTitle("Course Ending")
+                        .setContentText(course.getTitle() + " is ending today!")
+                        .setSmallIcon(R.drawable.rounded_corners)
+                        .setContentIntent(pendingIntent)
+                        .addAction(R.drawable.rounded_corners, "Course Starting",pendingIntent)
+                        .build();
+                notifyManager.notify(course.getId(),newNotification);
             }
         }
 
         // Loop through assessments to find start dates
         for(Assessment assessment: assessmentData) {
             Log.v("DEBUG", "We are looping through assessments to find due dates");
-            if(DateUtils.isToday(assessment.getDate().getTime())) {
+            if(assessment.getEnabledNotifications() && DateUtils.isToday(assessment.getDate().getTime())) {
                 Log.v("DEBUG", "Assessment due date is today");
-                alerts.add("Assessment " + assessment.getTitle() + " is due today!");
+
+                Intent notificationIntent = new Intent(this, MainActivity.class);
+                PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
+
+                Notification newNotification = new NotificationCompat.Builder(this, CHANNEL_ID)
+                        .setContentTitle("Assessment Due")
+                        .setContentText(assessment.getTitle() + "is DUE TODAY!")
+                        .setSmallIcon(R.drawable.rounded_corners)
+                        .setContentIntent(pendingIntent)
+                        .addAction(R.drawable.rounded_corners, "Assessment Due",pendingIntent)
+                        .build();
+                notifyManager.notify(assessment.getId(),newNotification);
             }
         }
         // Toast the alerts one at a time
@@ -203,6 +257,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void addSampleData() {
         mViewModel.addSampleData();
+    }
+
+    public void startService(View v){
+        Intent serviceIntent = new Intent(this, SchedulerNotifyService.class);
+        startService(serviceIntent);
+    }
+
+    public void stopService(View v){
+        Intent serviceIntent = new Intent(this, SchedulerNotifyService.class);
+        stopService(serviceIntent);
     }
 
     public void showTerms(View view) {

@@ -15,7 +15,7 @@ public class Course {
     private Date anticipatedEndDate;
     private CourseStatus courseStatus;
     private String note;
-    private boolean enableNotifications;
+    private boolean enabledNotifications;
 
     private int termId;
 
@@ -33,7 +33,7 @@ public class Course {
         this.courseStatus = courseStatus;
         this.termId = termId;
         this.note = note;
-        this.enableNotifications = false;
+        this.enabledNotifications = false;
     }
 
     @Ignore
@@ -43,7 +43,7 @@ public class Course {
         this.anticipatedEndDate = anticipatedEndDate;
         this.courseStatus = courseStatus;
         this.termId = termId;
-        this.enableNotifications = false;
+        this.enabledNotifications = false;
     }
 
     public Course(String title, Date startDate, Date anticipatedEndDate, CourseStatus courseStatus) {
@@ -51,7 +51,7 @@ public class Course {
         this.startDate = startDate;
         this.anticipatedEndDate = anticipatedEndDate;
         this.courseStatus = courseStatus;
-        this.enableNotifications = false;
+        this.enabledNotifications = false;
     }
 
     public int getId() {
@@ -110,11 +110,11 @@ public class Course {
         this.termId = termId;
     }
 
-    public boolean getEnableNotifications() {
-        return enableNotifications;
+    public boolean getEnabledNotifications() {
+        return enabledNotifications;
     }
 
-    public void setEnableNotifications(boolean notificationPreference) {
-        this.enableNotifications = notificationPreference;
+    public void setEnabledNotifications(boolean enableNotifications) {
+        this.enabledNotifications = enableNotifications;
     }
 }
